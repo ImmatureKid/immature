@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="js/jquery-1.8.3.js"></script>
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        .box{
+            width:1000px;
+            height:500px;
+            perspective:600px;
+            margin:0 auto;
+            position: relative;
+        }
+        .box .left{
+            position: absolute;
+            left:-50px;
+            top:0;
+            width:50px;
+            height:50px;
+            background:red;
+            z-index: 999;
+        }
+        .box .right{
+            position: absolute;
+            right:-50px;
+            top:0;
+            width:50px;
+            height:50px;
+            background:green;
+            z-index: 999;
+        }
+        .sub{
+            width:100%;
+            height:100%;
+            position: relative;
+            transform-style: preserve-3d;
+            list-style: none;
+        }
+        .sub li{
+            position: absolute;
+            left:250px;
+            top:0;
+            width:500px;
+            height:500px;
+            transition: all 1s ease;
+        }
+        .sub li:nth-child(1){
+            transform:translateX(-500px)translateZ(-100px);
+            background:yellow;
+            z-index:777;
+        }
+        .sub li:nth-child(2){
+            transform:translateX(-250px)translateZ(-50px);
+            background:green;
+            z-index:888;
+        }
+        .sub li:nth-child(3){
+            transform:none;
+            background:blue;
+            z-index:999;
+        }
+        .sub li:nth-child(4){
+            transform:translateX(250px)translateZ(-50px);
+            background:skyblue;
+            z-index:888;
+        }
+        .sub li:nth-child(5){
+            transform:translateX(500px)translateZ(-100px);
+            background:red;
+            z-index:777;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="left"></div>
+        <ul class="sub">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <div class="right"></div>
+    </div>
+    <script>
+        var num = 2;
+        var arr = [
+            {
+            transform:"translateX(250px) translateZ(-50px)",
+            background:"skyblue",
+            zIndex:888
+        },
+
+        { 
+            transform:"translateX(500px) translateZ(-100px)",
+            background:"red",
+            zIndex:777
+        },
+        {
+            transform:"translateX(-500px) translateZ(-100px)",
+            background:"yellow",
+            zIndex:777
+        },{
+            transform:"translateX(-250px) translateZ(-50px)",
+            background:"green",
+            zIndex:888 
+        },{
+            transform:"none",
+            background:"blue",
+            zIndex:999
+        },{
+            transform:"translateX(250px) translateZ(-50px)",
+            background:"skyblue",
+            zIndex:888
+        },{ 
+            transform:"translateX(500px) translateZ(-100px)",
+            background:"red",
+            zIndex:777
+        }, {
+            transform:"translateX(-500px) translateZ(-100px)",
+            background:"yellow",
+            zIndex:777
+        },
+        {
+            transform:"translateX(-250px) translateZ(-50px)",
+            background:"green",
+            zIndex:888 
+        }
+
+    ]
+    $(".right").click(function(){
+        num--;
+        if(num<0){
+            num=4
+        }
+        show(num)
+    })
+    function show(num){
+        var arr1 = arr.slice(num,num+5);
+        $("li").each(function(index){
+            $(this).css({
+                "transform":arr1[index].transform,
+                "background":arr1[index].background,
+                "z-index":arr1[index].zIndex
+
+            })
+        })
+    }
+    </script>
+</body>
+</html>

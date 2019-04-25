@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/首页.css">
+    <link rel="stylesheet" href="css/animate.min.css">
+    <script src="js/jquery-1.8.3.js"></script>
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        .header{
+            width:100%;
+            height:45px; 
+            background: -webkit-linear-gradient(top,blue,skyblue);
+        }
+        .top{
+            width:1200px;
+            margin:0 auto;
+            display: flex;
+            justify-content: space-between;
+        }
+        .top .top-left{
+            width:300px;
+            height:50px;
+            text-align: center;
+            font-size: 20px;
+            line-height: 50px;
+            color:white;
+        }
+        .top .top-right{
+            width:500px;
+            height:100%;
+            display: flex;
+        }
+        .top .top-right div{
+            width:calc(90%/3);
+            height:45px;
+            line-height: 45px;
+            text-align: center;
+            cursor: pointer;
+            color:white;
+        }
+        .top .top-right .active{
+            background:salmon;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="top">
+            <div class="top-left animated bounceInLeft">欢迎来到ImmatureKid的个人站</div>
+            <div class="top-right animated bounceInRight ">
+                <div class="active">相册</div>
+                <div>学习</div>
+                <div>游戏</div>
+            </div>
+        </div>
+    </div>
+    <div id="main"></div>
+</body>
+<script>
+    $(function() {
+		$.ajax({
+			url : "index1.html",
+			cache : true,
+			async : false,
+			success : function(html) {
+				$("#main").html(html);
+			}
+        });
+        $(".top-right div").click(function(){
+            $(this).addClass("active").siblings().removeClass("active");
+            $("#main").empty();
+            var num = $(this).index()+1;
+            if(num==1){
+                location.href="index.html";
+            }
+            $.ajax({
+			url : "index"+num+".html",
+			cache : true,
+			async : false,
+			success : function(html) {
+				$("#main").html(html);
+			}
+        });
+        })
+	})
+</script>
+</html>
